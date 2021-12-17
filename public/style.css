@@ -40,11 +40,12 @@
 }
 .simonNextColor{
   width:100px;
-  min-height:50px;
+  min-height:75px;
   border: solid;
   border-width: 5px;
   position:relative;
   left:150px;
+  background-color: white;
 }
 .simon{
   margin:10;

@@ -4,6 +4,10 @@ var level = 0;
 var going = false;
 var levelEnd = true;
 
+var highScore = localStorage.getItem('highScore')||0;
+
+updateHighScore();
+
 function letterToColor(a)
 {
   if(a=='R')
@@ -43,8 +47,21 @@ function randomColor()
     return 'Y';
   }
 }
+function updateHighScore()
+{
+  if(level>highScore)
+  {
+    highScore = level;
+    localStorage.setItem('highScore', highScore);
+  }
+  document.getElementById("highScore").innerHTML = "High Score: "+highScore;
+}
 function startNext()
 {
+  going = true;
+  userColors = [];
+  document.getElementById("curList").innerHTML=("Your current input:"+userColors.toString());
+
   level++;
   document.getElementById("level").innerHTML = "Level: "+ level;
   var nextColor = letterToColor(randomColor());
@@ -113,8 +130,9 @@ function checkAnswer(){
   }
   else if(correct&&userColors.length==simonColors.length)
   {
-    levelEnd =true;
-    document.getElementById("startButton").innerHTML = "Start";
+    updateHighScore();
+    startNext();
+    //document.getElementById("startButton").innerHTML = "Start";
   }
 
 }
